@@ -1,0 +1,2 @@
+class QrcodesController < ApplicationController
+end
