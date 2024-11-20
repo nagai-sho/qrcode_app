@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_19_032803) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_19_071240) do
   create_table "qrcodes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
+    t.string "token"
+    t.datetime "expires_at"
+    t.string "file_name"
   end
 
 end

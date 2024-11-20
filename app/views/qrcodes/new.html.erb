@@ -1,0 +1,38 @@
+<h1>QRコード生成</h1>
+<%= form_with(model: @qrcode, local: true) do |f| %>
+  <div>
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+  </div>
+  <%= f.submit 'QRコードを生成する' %>
+<% end %>
+<div id="qr-code-result"></div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('qr-code-result').innerHTML = `
+            <p>QRコードが生成されました</p>
+            <img src="${data.qr_code_url}" alt="Generated QR Code">
+          `;
+        } else {
+          document.getElementById('qr-code-result').innerHTML = `
+            <p>エラー: ${data.errors.join(', ')}</p>
+          `;
+        }
+      });
+    });
+  });
+</script>

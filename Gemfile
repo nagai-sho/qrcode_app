@@ -70,3 +70,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+gem "rqrcode"
+gem "chunky_png"
+gem 'htmlbeautifier'
