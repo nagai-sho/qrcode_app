@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'qrcodes#index'
+  root to: 'qrcodes#new'
   resources :qrcodes, only: [:create, :show], param: :token
 end
